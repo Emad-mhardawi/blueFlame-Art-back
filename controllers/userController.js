@@ -14,6 +14,11 @@ exports.login = asyncHandler(async (req, res, next) => {
 
   const user = await User.findOne({ email });
 
+  if(!user){
+      res.status(404);
+      throw new Error('no account is attached with this email');
+  }
+
   //check if the provided password match the password in the database
   //since the password is hashed, compare them with compare method bcrypt
   const passwordMatch = await bcrypt.compare(password, user.password);

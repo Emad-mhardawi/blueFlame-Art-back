@@ -5,8 +5,12 @@ const Schema = mongoose.Schema;
 const OrderSchema = Schema({
     user:{
         type: mongoose.Schema.Types.ObjectId,
-        require: true,
+        required: true,
         ref:'User'
+    },
+
+    portraitName:{
+        type:String
     },
 
     portraitStyle:{
@@ -14,10 +18,15 @@ const OrderSchema = Schema({
         required: true
     },
 
+    portraitSize:{
+        type: String,
+        require: true
+    },
+
     artWorkStatus:{
         type: String,
         required: true,
-        default: 'In Iroccess'
+        default: 'In progress'
     },
 
     fullBody:{
@@ -35,10 +44,11 @@ const OrderSchema = Schema({
 
     price:{
         type: Number,
-        required: true
+        required: true,
+        default: 35
     },
 
-    imageToPaint:{
+    imageUrl:{
         type: String,
         required: true,
     },
@@ -46,7 +56,7 @@ const OrderSchema = Schema({
     imageToDeliver:{
         type: String,
         required: true,
-        default: null
+        default: 'no image yet'
     },
 
     commentsToArtist:{
@@ -58,11 +68,13 @@ const OrderSchema = Schema({
     paymentMethod:{
         type: String,
         required: true,
+        default: 'card'
     },
 
     paymentResult:{
         id:{type: String},
-        status:{type: String}
+        status:{type: String, default:'no payment yet'},
+        
     },
 },{
     timestamps: true
